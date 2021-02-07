@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Scraping of lyrics using BeautifulSoup</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="/scraping-of-lyrics-using-beautifulsoup.html" rel="canonical" />
+
+        <meta name="description" content="Here we will consider a lyrics scraping task with some theoretical and practical information. Data Scraping Data Scraping (a.k.a web...">
+
+        <meta name="author" content="nova">
+
+
+        <meta property="og:locale" content="" />
+    <meta property="og:site_name" content="DEV" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DEV" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="" />
+      <meta name="og:image" content="/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="/author/nova.html">
+  <meta property="og:url" content="/scraping-of-lyrics-using-beautifulsoup.html">
+  <meta property="og:title" content="Scraping of lyrics using BeautifulSoup">
+  <meta property="article:published_time" content="2021-02-06 00:00:00+01:00">
+            <meta property="og:description" content="Here we will consider a lyrics scraping task with some theoretical and practical information. Data Scraping Data Scraping (a.k.a web...">
+
+            <meta property="og:image" content="/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Scraping of lyrics using BeautifulSoup</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/nova.html">Nova</a>
+            | <time datetime="Сб 06 февраля 2021">Сб 06 февраля 2021</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Here we will consider a lyrics scraping task with some theoretical and practical information. </p>
+<h2>Data Scraping</h2>
+<p>Data Scraping (a.k.a web scraping) is a technique of extracting information from a website. Researchers take to it when a website doesn’t provide an API.
+Before parsing data from any site, you must read the rules for using the content presented on the site. There are no strict legal procedures, but sites can have their own policies and prohibit certain actions or block users who violate the rules.
+Moreover, if the server receives a number of requests that exceed its bandwidth, it will not be able to process them and will throw an error. Therefore, be careful and optimize your script before running it.
+The AZlyrics does not allow the content to be used by other lyric providers, but we are only going to use the data for our own research, so it should not be illegal.</p>
+<h2>BeautifulSoup</h2>
+<p>There are different libraries and tools for importing data from the web.  We’ll use the most popular ones: <code>requests</code> and <code>BeautifulSoup</code>.
+The requests module allows us to make HTTP requests, which returns a Response Object with all the response data, including the status of the request and the content of the website as an HTML document.
+BeautifulSoup is a Python library, which is often used for parsing HTML documents. It converts the document into a tree of objects such as BeautifulSoup, tag, navigable string. 
+BeautifulSoup object contains the nested html tags (body, div, p, etc) and we can apply<code>find()</code>, <code>find_all()</code>, <code>select()</code> methods to find a specific tag that contains the information we are looking for.
+Tag object has properties and attributes. The most commonly used properties during the document parsing are <code>class</code> and <code>id</code>. The id value is unique for the entire document, but several components can have the same class. These properties help us to find the certain tag. Using the <code>text</code> attribute we can get the text between the opening and closing tags. The <code>attrs</code> returns a dictionary of attributes that are inside the tag (for instance, a.attrs[‘href’] returns a link from <a> tag). 
+        Follow the links to find more details about requests and BeautifulSoup
+<a href="https://requests.readthedocs.io/en/master/">request</a>
+<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects">BeautifulSoup</a></p>
+<h2>Specificity of AZlyrics</h2>
+<div class="highlight"><pre><span></span><code><span class="err">    Let’s go to an artist (Miley Cyrus: https://www.azlyrics.com/m/mileycyrus.html) and look at how the information is structured on AZlyrics (right-click Inspect to find the code).</span>
+</code></pre></div>
+
+
+<p><img alt="Artist Page" src="images/artistpage.png"></p>
+<div class="highlight"><pre><span></span><code><span class="err">    The page of the artist contains a list of his albums and songs, which are at the same level in the HTML document - song containers are not nested in the album container. Each container with `class=”listalbum-item”` contains the name of the songs and a link to the lyrics inside the &lt;a&gt; tag. We can follow the link and see that the text is in &lt;div&gt;, which hasn’t a specific class or id, but it’s involved in the parent container with `class=&quot;col-xs-12 col-lg-8 text-center&quot;`, so we can easily extract the text.</span>
+</code></pre></div>
+
+
+<p><img alt="Artist Page" src="images/songpage.png"></p>
+<h2>Data extraction</h2>
+<p>There are several steps we are going to follow.
+1.  <strong>Parse the content of the initial url</strong>
+To get the content from the website we will use <code>requests</code> library with a link to the artist page (additionally, we can specify a user agent and pass it in a dictionary to <code>get</code> method  as a <code>headers’ parameter).  The custom user agent can help us to avoid a ban from the server.</code>requests.get()` will return an HTML document, which is parsed by BeautifulSoup.</p>
+<div class="highlight"><pre><span></span><code><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com/m/mileycyrus.html&#39;</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<ol>
+<li><strong>Parse the content of the songs pages</strong>
+Go through the list of song containers: </li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.listalbum-item&#39;</span><span class="p">):</span>
+</code></pre></div>
+
+
+<p>Construct the full link to the lyrics, as the <a> contains relative link:</p>
+<div class="highlight"><pre><span></span><code><span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Extract the content and parse the document:</p>
+<div class="highlight"><pre><span></span><code><span class="n">s_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s_link</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">page_content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">s_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Select the container with the <code>class=”col-xs-12.col-lg-8.text-center”</code> and pull the lyrics. </p>
+<div class="highlight"><pre><span></span><code><span class="n">s_text</span> <span class="o">=</span> <span class="n">page_content</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;.col-xs-12.col-lg-8.text-center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>Get album information, including its title, year of realise (check if there is an album, because some releases do not involved into any album):</p>
+<div class="highlight"><pre><span></span><code><span class="n">lyrics</span> <span class="o">=</span> <span class="n">page_content</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;.col-xs-12.col-lg-8.text-center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">album</span> <span class="o">=</span> <span class="n">page_content</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;.songinalbum_title&#39;</span><span class="p">)</span>
+<span class="n">album_details</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">album_title</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">album</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">album_details</span> <span class="o">=</span> <span class="n">album</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">album_title</span> <span class="o">=</span> <span class="n">album</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div>
+
+
+<p>Add a dictionary containing the song title, its lyrics and album information to dataset:
+ <code>python       
+    data.append({
+        'album_info': album_details, 
+        'album_title': album_title,
+        'lyrics': lyrics.text,
+        'song_title': s.a.text
+    })</code></p>
+<p>As it was written above, multiple requests can overload the server and it can affect its functioning. Moreover, multiple requests to the server with the same IP address can cause a ban of the user, as it may be recognized as suspicious actions. 
+We can solve it by adding a delay  in every loop: <code>time.sleep(15)</code>.
+The result is converted to a dataframe and saved into csv-file.</p>
+<p>The code is available on <a href="https://github.com/novamind/dataparsing">GitHub</a>. Feel free to open pull requests.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Scraping of lyrics using BeautifulSoup&amp;url=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="/theme/js/script.js"></script>
+  
+</body>
+</html>
