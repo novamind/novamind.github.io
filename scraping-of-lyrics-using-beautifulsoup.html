@@ -150,7 +150,7 @@ Find more details at <a href="https://requests.readthedocs.io/en/master/">reques
 </code></pre></div>
 
 
-<p>Construct the full link to the lyrics, as the <a> contains relative link:</p>
+<p>Construct the full link to the lyrics, as the <code>&lt;a&gt;</code> contains relative link:</p>
 <div class="highlight"><pre><span></span><code><span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
