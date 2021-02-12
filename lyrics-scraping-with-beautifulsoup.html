@@ -146,8 +146,8 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
 
 
 <p>Extract the content of the song page and parse the document:</p>
-<div class="highlight"><pre><span></span><code>    <span class="n">s_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s_link</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="n">page_content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">s_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">s_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s_link</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">page_content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">s_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
