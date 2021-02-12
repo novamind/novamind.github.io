@@ -130,15 +130,15 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
 <p><img alt="Artist Page" src="images/songpage.png"></p>
 <h2>Data extraction</h2>
 <p>There are several steps we are going to follow.</p>
-<p><strong>1.  Parse the content of the initial url</strong></p>
+<p><strong>Parse the content of the initial url</strong></p>
 <p>To scrape the data from the website we will use <code>requests</code> library with a link to the artist page.</p>
-<div class="highlight"><pre><span></span><code><span class="err">url = &#39;https://www.azlyrics.com/m/mileycyrus.html&#39;</span>
-<span class="err">page = requests.get(url, headers=headers)</span>
-<span class="err">soup = BeautifulSoup(page.content, &#39;html.parser&#39;)</span>
+<div class="highlight"><pre><span></span><code><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com/m/mileycyrus.html&#39;</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p><strong>2. Parse the content of the songs pages</strong></p>
+<p><strong>Parse the content of the songs pages</strong></p>
 <p>Go through the list of song containers and construct the full link to the lyric, as the <code>&lt;a&gt;</code> contains relative link:</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.listalbum-item&#39;</span><span class="p">):</span>
     <span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
