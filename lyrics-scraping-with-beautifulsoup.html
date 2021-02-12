@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>Scraping of lyrics using BeautifulSoup</title>
+  <title>Lyrics Scraping with BeautifulSoup</title>
 
 
   <meta name="HandheldFriendly" content="True" />
@@ -36,7 +36,7 @@
   <![endif]-->
 
 
-    <link href="/scraping-of-lyrics-using-beautifulsoup.html" rel="canonical" />
+    <link href="/lyrics-scraping-with-beautifulsoup.html" rel="canonical" />
 
         <meta name="description" content="Here we will consider a lyrics scraping task with some theoretical and practical information. Data Scraping Data Scraping (a.k.a web...">
 
@@ -53,8 +53,8 @@
 
   <meta property="og:type" content="article">
             <meta property="article:author" content="/author/nova.html">
-  <meta property="og:url" content="/scraping-of-lyrics-using-beautifulsoup.html">
-  <meta property="og:title" content="Scraping of lyrics using BeautifulSoup">
+  <meta property="og:url" content="/lyrics-scraping-with-beautifulsoup.html">
+  <meta property="og:title" content="Lyrics Scraping with BeautifulSoup">
   <meta property="article:published_time" content="2021-02-06 00:00:00+01:00">
             <meta property="og:description" content="Here we will consider a lyrics scraping task with some theoretical and practical information. Data Scraping Data Scraping (a.k.a web...">
 
@@ -90,7 +90,7 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Scraping of lyrics using BeautifulSoup</h1>
+        <h1 class="post-title">Lyrics Scraping with BeautifulSoup</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="/author/nova.html">Nova</a>
@@ -115,17 +115,17 @@
 <h2>Data Scraping</h2>
 <p>Data Scraping (a.k.a web scraping) is a technique of extracting information from a website. Researchers take to it when a website doesn’t provide an API.
 Before parsing data from any site, you must read the rules for using the content presented on the site. There are no strict legal procedures, but sites can have their own policies and prohibit certain actions or block users who violate the rules.
-Moreover, if the server receives a number of requests that exceed its bandwidth, it will not be able to process them and will throw an error. Therefore, be careful and optimize your script before running it.
-The AZlyrics does not allow the content to be used by other lyric providers, but we are only going to use the data for our own research, so it should not be illegal.</p>
+Moreover, if the server receives a number of requests that exceed its bandwidth, it will not be able to process them and will throw an error. Therefore, be careful and optimize your script before running it.</p>
 <h2>BeautifulSoup</h2>
-<p>There are different libraries and tools for importing data from the web.  We’ll use the most popular ones: <code>requests</code> and <code>BeautifulSoup</code>.
-The requests module allows us to make HTTP requests, which returns a Response Object with all the response data, including the status of the request and the content of the website as an HTML document.
-BeautifulSoup is a Python library, which is often used for parsing HTML documents. It converts the document into a tree of objects such as BeautifulSoup, tag, navigable string. 
-BeautifulSoup object contains the nested html tags (body, div, p, etc) and we can apply<code>find()</code>, <code>find_all()</code>, <code>select()</code> methods to find a specific tag that contains the information we are looking for.
-Tag object has properties and attributes. The most commonly used properties during the document parsing are <code>class</code> and <code>id</code>. The id value is unique for the entire document, but several components can have the same class. These properties help us to find the certain tag. Using the <code>text</code> attribute we can get the text between the opening and closing tags. The <code>attrs</code> returns a dictionary of attributes that are inside the tag (for instance, a.attrs[‘href’] returns a link from <code>&lt;a&gt;</code> tag). 
-Find more details at <a href="https://requests.readthedocs.io/en/master/">requests</a> and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects">BeautifulSoup</a>:</p>
+<p>We’ll use the most popular python libraries for data scraping and parsing: <code>requests</code> and <code>BeautifulSoup</code>.
+The requests module allows us to make HTTP requests, which returns the content of the website as an HTML document.</p>
+<p>BeautifulSoup is often used for parsing HTML documents. It converts the document into a tree of objects such as BeautifulSoup, tag, navigable string. 
+BeautifulSoup object contains the nested html tags (body, div, p, etc) and we can find a tag with specific parameters that contains the information we are looking for.</p>
+<p>You can find more details at <a href="https://requests.readthedocs.io/en/master/">requests</a> and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects">BeautifulSoup</a>.</p>
 <h2>Specificity of AZlyrics</h2>
-<p>Let’s go to an artist (Miley Cyrus: https://www.azlyrics.com/m/mileycyrus.html) and look at how the information is structured on AZlyrics (right-click Inspect to find the code). </p>
+<p>We will consider the lyrics scraping from AZlyrics as it provides a huge number of song lyrics of different artists and genres. AZlyrics does not allow the content to be used by other lyrics providers, so if you are a provider, do not run the script :)</p>
+<p>Let’s go to an artist (for instance: <a href="https://www.azlyrics.com/m/mileycyrus.html">Miley Cyrus</a>) and look at how the information is structured on the website (right-click Inspect to find the code). </p>
+<p>In Elements we can see a tree of html tags. Tags have properties and attributes. The most commonly used properties during the document parsing are <code>class</code> and <code>id</code>. The id value is unique for the entire document, but several components can have the same class name. These properties help us to find the certain tag. Using the <code>text</code> attribute we can get the text between the opening and closing tags. The <code>attrs</code> returns a dictionary of attributes that are inside the tag (for instance, a.attrs[‘href’] returns a link from <code>&lt;a&gt;</code> tag). </p>
 <p><img alt="Artist Page" src="images/artistpage.png"></p>
 <p>The page of the artist contains a list of his albums and songs, which are at the same level in the HTML document - song containers are not nested in the album container. Each container with <code>class=”listalbum-item”</code> contains the name of the songs and a link to the lyrics inside the <code>&lt;a&gt;</code> tag. We can follow the link and see that the text is in <code>&lt;div&gt;</code>, which hasn’t a specific class or id, but it’s involved in the parent container with <code>class="col-xs-12 col-lg-8 text-center"</code>, so we can easily extract the text.</p>
 <p><img alt="Artist Page" src="images/songpage.png"></p>
@@ -134,28 +134,23 @@ Find more details at <a href="https://requests.readthedocs.io/en/master/">reques
 <ol>
 <li><strong>Parse the content of the initial url</strong></li>
 </ol>
-<p>To get the content from the website we will use <code>requests</code> library with a link to the artist page (additionally, we can specify a user agent and pass it in a dictionary to <code>get</code> method  as a headers parameter).  The custom user agent can help us to avoid a ban from the server.</p>
-<p><code>requests.get()</code> will return an HTML document, which is parsed by BeautifulSoup.</p>
-<div class="highlight"><pre><span></span><code><span class="err">url = &#39;https://www.azlyrics.com/m/mileycyrus.html&#39;</span>
-<span class="err">page = requests.get(url, headers=headers)</span>
-<span class="err">soup = BeautifulSoup(page.content, &#39;html.parser&#39;)</span>
+<p>To scrape the data from the website we will use <code>requests</code> library with a link to the artist page.</p>
+<div class="highlight"><pre><span></span><code><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com/m/mileycyrus.html&#39;</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
 <ol>
 <li><strong>Parse the content of the songs pages</strong></li>
 </ol>
-<p>Go through the list of song containers: </p>
+<p>Go through the list of song containers and construct the full link to the lyric, as the <code>&lt;a&gt;</code> contains relative link:</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.listalbum-item&#39;</span><span class="p">):</span>
+    <span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p>Construct the full link to the lyrics, as the <code>&lt;a&gt;</code> contains relative link:</p>
-<div class="highlight"><pre><span></span><code><span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>Extract the content and parse the document:</p>
+<p>Extract the content of the song page and parse the document:</p>
 <div class="highlight"><pre><span></span><code><span class="n">s_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s_link</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">page_content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">s_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
@@ -187,21 +182,21 @@ Find more details at <a href="https://requests.readthedocs.io/en/master/">reques
 </code></pre></div>
 
 
-<p>As it was written above, multiple requests can overload the server and it can affect its functioning. Moreover, multiple requests to the server with the same IP address can cause a ban of the user, as it may be recognized as suspicious actions. 
-We can solve it by adding a delay  in every loop: <code>time.sleep(15)</code>.
-The result is converted to a dataframe and saved into csv-file.</p>
+<p>Multiple requests can overload the server and it can affect its functioning. Moreover, requests to the server with the same IP address can cause a ban of the user, as it may be recognized as suspicious actions. 
+We can solve it by using a custom user agent and adding a delay in every loop: <code>time.sleep(15)</code>.</p>
+<p>Now we have a list of lyrics, which can be saved in any format that fit the data processing task.</p>
 <p>The code is available on <a href="https://github.com/novamind/dataparsing">GitHub</a>. Feel free to open pull requests.</p>
             </section>
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Scraping of lyrics using BeautifulSoup&amp;url=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Lyrics Scraping with BeautifulSoup&amp;url=/lyrics-scraping-with-beautifulsoup.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/lyrics-scraping-with-beautifulsoup.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=/scraping-of-lyrics-using-beautifulsoup.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/lyrics-scraping-with-beautifulsoup.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
