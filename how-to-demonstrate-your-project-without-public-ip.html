@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>How to demonstrate your project without public ip</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="/how-to-demonstrate-your-project-without-public-ip.html" rel="canonical" />
+
+        <meta name="description" content="Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local...">
+
+        <meta name="author" content="nova">
+
+
+        <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="DEV" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DEV" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="" />
+      <meta name="og:image" content="/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="/author/nova.html">
+  <meta property="og:url" content="/how-to-demonstrate-your-project-without-public-ip.html">
+  <meta property="og:title" content="How to demonstrate your project without public ip">
+  <meta property="article:published_time" content="2021-02-19 00:00:00+01:00">
+            <meta property="og:description" content="Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local...">
+
+            <meta property="og:image" content="/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">How to demonstrate your project without public ip</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/nova.html">Nova</a>
+            | <time datetime="Fri 19 February 2021">Fri 19 February 2021</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local network, you need to type the IP address and the port. But if you want to do that over the Internet, you can encounter some troubles (http://public_ip:port doesn’t work), as usually, your computer is behind the NAT, which means you should provide ports forwarding, but it can be not easy and sometimes Internet Service Providers do not allow change the settings. To avoid these problems, you can use <strong>ngrok</strong>.</p>
+<p>Ngrok is a service that creates a tunnel to your computer and generates an URL that you can share to access your service or files.</p>
+<p>To install ngrok on Linux you can go through the following steps:</p>
+<div class="highlight"><pre><span></span><code>$ mkdir ngrok
+$ <span class="nb">cd</span> ngrok/
+$ wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+$ unzip ngrok-stable-linux-amd64.zip
+</code></pre></div>
+
+
+<p>As you have installed the ngrok, you need to show up your server. As an example, I’ll use python’s http.server to get a prototype API:</p>
+<p><code>$ python -m http.server 8181</code></p>
+<p>Now your directory is serving to the specified port: 
+<code>Serving HTTP on 0.0.0.0 port 8181 (http://0.0.0.0:8181/) …</code> 
+If there is an <code>index.html</code> file, you will get the file, otherwise the directory content.</p>
+<p>Having a local server you can expose it to the Internet. All you need is to start ngrok using the port that your server is listening on:
+<code>$ ./ngrok http 8181</code>
+<img alt="ngrok status" src="images/ngrok_test.png" title="ngrok session information"></p>
+<p>Here you can see the temporary domain for exposing your files or service, which can be accessed from other machines. In my case it is a simple server that handles 2 parameters to get a prediction:</p>
+<p><img alt="ngrok api test" src="images/ngrok_api_test.png" title="API test"></p>
+<p>Note, that this approach has no built-in security and data protection features. Consider using TLS/SSL or a VPN connection if you need some more security.
+Read the <a href="https://ngrok.com/docs#http">documentation</a> to find more details. </p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=How to demonstrate your project without public ip&amp;url=/how-to-demonstrate-your-project-without-public-ip.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/how-to-demonstrate-your-project-without-public-ip.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/how-to-demonstrate-your-project-without-public-ip.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="/theme/js/script.js"></script>
+  
+</body>
+</html>
