@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Lyrics analysis</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="" rel="canonical" />
+
+  <!-- Feed -->
+
+  <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="/theme/css/code_blocks/github.css" rel="stylesheet">
+
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="/lyrics-analysis.html" rel="canonical" />
+
+        <meta name="description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the...">
+
+        <meta name="author" content="nova">
+
+
+        <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="DEV" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DEV" />
+    <meta property="og:description" content="View the blog." />
+    <meta property="og:url" content="" />
+      <meta name="og:image" content="/theme/images/post-bg.jpg">
+
+  <meta property="og:type" content="article">
+            <meta property="article:author" content="/author/nova.html">
+  <meta property="og:url" content="/lyrics-analysis.html">
+  <meta property="og:title" content="Lyrics analysis">
+  <meta property="article:published_time" content="2021-03-11 00:00:00+01:00">
+            <meta property="og:description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the...">
+
+            <meta property="og:image" content="/theme/images/post-bg.jpg">
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Lyrics analysis</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="/author/nova.html">Nova</a>
+            | <time datetime="Thu 11 March 2021">Thu 11 March 2021</time>
+        </span>
+        <!-- TODO : Modified check -->
+        
+            <div class="post-cover cover" style="background-image: url('/theme/images/post-bg.jpg')">
+        
+      </div>
+    </header>    
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p>Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the artist uses in his songs? What are the most common and most rarely used words?  Is there correlation in these characteristics over the releases. Interesting to know, right? =) Let’s build some charts.</p>
+<h2>Data</h2>
+<p>As an example I am going to use lyrics of Miley Cirus scraped from the <a href="https://www.azlyrics.com/m/mileycyrus.html">AZLyrics</a>. How to scrape and parse the data I’ve described <a href="https://novamind.github.io/lyrics-scraping-with-beautifulsoup.html">here</a>. </p>
+<p>The dataset consists of 160 songs and contains the title, lyrics, album title and the album information (if it has). The album information includes the type (e.g. soundtrack) and year of the release (for instance: 'EP: "The Time Of Our Lives" (2009)'), which should be splitted into separate columns.</p>
+<h2>Preprocessing</h2>
+<p>Since we have data, we can do a data science=) As it was already mentioned, the dataset contains a list of texts and in order to find answers to our questions we need to split it into words. This process is called tokenization, and words in this case are tokens.
+In many NLP tasks I use the Spacy library. Spacy is a multitool for text processing, besides splitting the text into sentences and words, it builds a dependency tree (type of syntactic representation of the text) and provides part of speech (PoS) and dependency tagging. Even if Spacy may seem excessive for our case, it gives a simple API and can be necessary if you decide to make advanced analysis. Using Spacy we’ll tokenize the lyrics and make some basic preprocessing: 
+exclude stop words (pronouns, auxiliary, etc) and punctuation (<code>is_stop</code> and <code>is_punct</code> attributes of the <code>Token</code> object)
+get lemmas - basic forms of the words (<code>lemma</code> attribute)</p>
+<h2>Counting</h2>
+<p>Having tokens, we can calculate their frequency in the entire dataset or in some group of the lyrics. We’ll use a built-in <code>Counter</code>, that forms a list of tuples (a word and how much it occurs in the input data) and allows us to get the most common words.</p>
+<p>First let’s check how many songs are in each album and EP. <img alt="Number of Songs" src="images/lyrics_analysis/numberofsongs.png"></p>
+<p>So, there is a big difference in the number of songs: the EPs contain 6 and 7 songs, the albums contain from 11 to 22 songs. 
+After the preprocessing of the initial list of tokens there are 2107 unique words in the dataset. Let’s see how the number of words vary from release to release. <img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_words_in_lyrics.png"></p>
+<p>Did you know that a couple of words are enough for a song? =) Probably it’s a short intro. The longest poetries in “Bangerz”,  the rest of the releases mostly have from 60 to 150 words. But there are some outliers, which contain up to 280 words. Let’s check unique words. <img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_unique_words_in_lyrics.png"></p>
+<p>It is interesting, the most wide vocabulary is used in one of the shortest EPs, and the longest release is quite average. In general, 50% of all songs are composed with about 40 - 60 unique words. A few songs consist of more than 100 different words. <img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_unique_words_in_dataset.png"></p>
+<h2>Most common and rare</h2>
+<p>Let’s find out what words are most often used in the songs and which of them are least popular. <img alt="Number of words in lyrics" src="images/lyrics_analysis/word_frequency.png"></p>
+<p>The top 30 words in Miley Cyrus songs includes <em>know</em>, <em>love</em>, <em>wanna</em>, <em>need</em>, <em>heart</em>, <em>baby</em> and others, which does not say too much, as probably that is a common situation for most popular music. Moreover, there are a couple of interjections (<em>oh</em>, <em>la</em>, <em>na</em> etc), which is also expected. We can find out which words are in most of the songs. <img alt="Number of words in lyrics" src="images/lyrics_analysis/unique_word_frequency.png"></p>
+<p>The list of top words doesn’t change dramatically.  About 110 songs include know, more than 80 lyrics contain love and like.
+Let’s look at words that appear only once. There are 867 such ones. A few examples: <em>adorable</em>, <em>finish</em>, <em>pollution</em>, <em>bag</em>, <em>intertwine</em>, <em>dusk</em>, <em>arrow</em>, <em>hoppin</em>, <em>stray</em>, <em>last</em>. If the top-30 of the most popular words consist of only monosyllabic words, the list of infrequent words includes words that have 2 and 3 syllabics.</p>
+<p>At this point we pause our research. We explored some basic statistics and found out the most popular and rare words. You can continue exploratory analysis, using Spacy features, compare with other artists and so on.</p>
+<p>The code is available on <a href="https://github.com/novamind/dataparsing">GitHub</a>. Feel free to open pull requests.</p>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Lyrics analysis&amp;url=/lyrics-analysis.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/lyrics-analysis.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=/lyrics-analysis.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+
+                <div class="clear"></div>
+
+ 
+
+                </section>
+
+
+                <aside class="post-nav">
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+  
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+
+  <script type="text/javascript" src="/theme/js/script.js"></script>
+  
+</body>
+</html>
