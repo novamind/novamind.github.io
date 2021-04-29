@@ -2,20 +2,19 @@
 <html lang="en">
 
 <head>
-      <meta charset="utf-8">
+    <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 
-  <title>Lyrics analysis</title>
+  <title>Exploratory analysis of lyrics</title>
 
 
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="origin" />
   <meta name="generator" content="Pelican" />
-  <link href="" rel="canonical" />
-
+<link href="/exploratory-analysis-of-lyrics.html" rel="canonical" />
   <!-- Feed -->
 
   <link href="/theme/css/style.css" type="text/css" rel="stylesheet" />
@@ -36,29 +35,62 @@
   <![endif]-->
 
 
-    <link href="/lyrics-analysis.html" rel="canonical" />
 
-        <meta name="description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the...">
+    <meta name="description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the artist uses in his songs? What are the most common and most rarely used words? Is there correlation in these characteristics over the releases. Interesting to know, right? =) Let’s build some charts.">
 
-        <meta name="author" content="nova">
+    <meta name="author" content="nova">
+
+    <meta name="tags" content="Preprocessing">
+    <meta name="tags" content="Statistics">
+    <meta name="tags" content="Lyrics Analysis">
+    <meta name="tags" content="Exploratory Analysis">
+    <meta name="tags" content="NLP">
+    <meta name="tags" content="spacy">
+    <meta name="tags" content="Miley Cirus">
 
 
-        <meta property="og:locale" content="en" />
-    <meta property="og:site_name" content="novamind" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="novamind" />
-    <meta property="og:description" content="View the blog." />
-    <meta property="og:url" content="" />
-      <meta name="og:image" content="/theme/images/post-bg.jpg">
 
-  <meta property="og:type" content="article">
-            <meta property="article:author" content="/author/nova.html">
-  <meta property="og:url" content="/lyrics-analysis.html">
-  <meta property="og:title" content="Lyrics analysis">
-  <meta property="article:published_time" content="2021-03-11 00:00:00+01:00">
-            <meta property="og:description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the...">
 
-            <meta property="og:image" content="/theme/images/post-bg.jpg">
+<!-- Open Graph -->
+<meta property="og:site_name" content="novamind"/>
+<meta property="og:title" content="Exploratory analysis of lyrics"/>
+<meta property="og:description" content="Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/exploratory-analysis-of-lyrics.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-03-11 00:00:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/nova.html">
+<meta property="article:section" content="Review"/>
+<meta property="article:tag" content="Preprocessing"/>
+<meta property="article:tag" content="Statistics"/>
+<meta property="article:tag" content="Lyrics Analysis"/>
+<meta property="article:tag" content="Exploratory Analysis"/>
+<meta property="article:tag" content="NLP"/>
+<meta property="article:tag" content="spacy"/>
+<meta property="article:tag" content="Miley Cirus"/>
+<meta property="og:image" content="/theme/images/home-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Exploratory analysis of lyrics",
+  "headline": "Exploratory analysis of lyrics",
+  "datePublished": "2021-03-11 00:00:00+01:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "nova",
+    "url": "/author/nova.html"
+  },
+  "image": "/theme/images/home-bg.jpg",
+  "url": "/exploratory-analysis-of-lyrics.html",
+  "description": "Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the..."
+}
+</script>
 </head>
 <!-- TODO : Body class -->
 <body class="home-template">
@@ -84,24 +116,22 @@
       <div class="inner">
         <nav id="navigation">
             <span id="home-button" class="nav-button">
-                <a class="home-button" href="" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+                <a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
             </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Lyrics analysis</h1>
+        <h1 class="post-title">Exploratory analysis of lyrics</h1>
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
-                <a href="/author/nova.html">Nova</a>
+                <a href="/author/nova.html">Valentina Kononova</a>
             | <time datetime="Thu 11 March 2021">Thu 11 March 2021</time>
         </span>
         <!-- TODO : Modified check -->
-        
-            <div class="post-cover cover" style="background-image: url('/theme/images/post-bg.jpg')">
-        
+            <div class="post-cover cover" style="background-image: url('/theme/images/home-bg.jpg')">
       </div>
-    </header>    
+    </header>
 
   <section id="wrapper">
     <a class="hidden-close"></a>
@@ -113,7 +143,7 @@
             <section class="post-content">
                 <p>Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the artist uses in his songs? What are the most common and most rarely used words?  Is there correlation in these characteristics over the releases. Interesting to know, right? =) Let’s build some charts.</p>
 <h2>Data</h2>
-<p>As an example I am going to use lyrics of Miley Cirus scraped from the <a href="https://www.azlyrics.com/m/mileycyrus.html">AZLyrics</a>. How to scrape and parse the data I’ve described <a href="https://novamind.github.io/lyrics-scraping-with-beautifulsoup.html">here</a>. </p>
+<p>As an example I am going to use lyrics of Miley Cyrus scraped from the <a href="https://www.azlyrics.com/m/mileycyrus.html">AZLyrics</a>. How to scrape and parse the data I’ve described <a href="https://novamind.github.io/lyrics-scraping-with-beautifulsoup.html">here</a>. </p>
 <p>The dataset consists of 160 songs and contains the title, lyrics, album title and the album information (if it has). The album information includes the type (e.g. soundtrack) and year of the release (for instance: 'EP: "The Time Of Our Lives" (2009)'), which should be splitted into separate columns.</p>
 <h2>Preprocessing</h2>
 <p>Since we have data, we can do a data science=) As it was already mentioned, the dataset contains a list of texts and in order to find answers to our questions we need to split it into words. This process is called tokenization, and words in this case are tokens.
@@ -138,22 +168,39 @@ Let’s look at words that appear only once. There are 867 such ones. A few exam
 
             <section class="post-info">
                 <div class="post-share">
-                    <a class="twitter" href="https://twitter.com/share?text=Lyrics analysis&amp;url=/lyrics-analysis.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <a class="twitter" href="https://twitter.com/share?text=Exploratory analysis of lyrics&amp;url=/exploratory-analysis-of-lyrics.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
                     </a>
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/lyrics-analysis.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=/exploratory-analysis-of-lyrics.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
                     </a>
-                    <a class="googleplus" href="https://plus.google.com/share?url=/lyrics-analysis.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <a class="googleplus" href="https://plus.google.com/share?url=/exploratory-analysis-of-lyrics.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
                     </a>
                     <div class="clear"></div>
                 </div>
 
+                <aside class="post-tags">
+<a href="/tag/preprocessing.html">Preprocessing</a><a href="/tag/statistics.html">Statistics</a><a href="/tag/lyrics-analysis.html">Lyrics Analysis</a><a href="/tag/exploratory-analysis.html">Exploratory Analysis</a><a href="/tag/nlp.html">NLP</a><a href="/tag/spacy.html">spacy</a><a href="/tag/miley-cirus.html">Miley Cirus</a>                </aside>
 
                 <div class="clear"></div>
 
- 
+                <aside class="post-author">
+
+
+                        <figure class="post-author-avatar">
+                            <img src="/images/bio.jpg" alt="Valentina Kononova" />
+                        </figure>
+                    <div class="post-author-bio">
+                        <h4 class="post-author-name"><a href="/author/nova.html">Valentina Kononova</a></h4>
+                            <p class="post-author-about">Master of Science with 2 years of international experience in natural language processing. Designed and deployed a variety of models using advanced AI/ML algorithms.</p>
+                            <span class="post-author-location"><i class="ic ic-location"></i> Russia</span>
+                        <!-- Social linkes in alphabet order. -->
+                            <span class="post-author-github"><a target="_blank" href="https://github.com/novamind"><i class="ic ic-link"></i> GitHub</a></span>
+                            <span class="post-author-linkedin"><a target="_blank" href="https://www.linkedin.com/in/valentina-kononova-a9a23b180"><i class="ic ic-link"></i> LinkedIn</a></span>
+                    </div>
+                    <div class="clear"></div>
+                </aside>
 
                 </section>
 
@@ -167,10 +214,12 @@ Let’s look at words that appear only once. There are 867 such ones. A few exam
     </main>
       <!-- TODO : Body class -->
     <div id="body-class" style="display: none;" class=""></div>
-  
+
     <footer id="footer">
       <div class="inner">
         <section class="credits">
+
+
           <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
           <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
         </section>
@@ -178,7 +227,8 @@ Let’s look at words that appear only once. There are 867 such ones. A few exam
     </footer>
   </section>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script type="text/javascript" src="/theme/js/script.js"></script>
-  
+
 </body>
 </html>
