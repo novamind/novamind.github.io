@@ -65,7 +65,7 @@
 <meta property="article:tag" content="NLP"/>
 <meta property="article:tag" content="spacy"/>
 <meta property="article:tag" content="Eminem"/>
-<meta property="og:image" content="/theme/images/home-bg.jpg">
+<meta property="og:image" content="/images/bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -82,7 +82,7 @@
     "name": "nova",
     "url": "/author/nova.html"
   },
-  "image": "/theme/images/home-bg.jpg",
+  "image": "/images/bg.jpg",
   "url": "/eminem-vs-miley-cyrus-nlp.html",
   "description": "In previous post we have analyzed the lyrics of Miley Cyrus. Let’s check Eminem. Probably rappers have a more diverse vocabulary in..."
 }
@@ -126,7 +126,7 @@
             | <time datetime="Fri 19 March 2021">Fri 19 March 2021</time>
         </span>
         <!-- TODO : Modified check -->
-            <div class="post-cover cover" style="background-image: url('/theme/images/home-bg.jpg')">
+            <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
       </div>
     </header>
 
@@ -142,8 +142,10 @@
 <h2>Preprocessing</h2>
 <p>I’ve obtained (details <a href="https://novamind.github.io/lyrics-scraping-with-beautifulsoup.html">here</a>) and preprocessed the dataset in the same way except for excluding the text inside of square brackets: now anything inside them is deleting. It helps to exclude noisy tokens such as 2x.</p>
 <h2>Number of songs</h2>
-<p>Let’s look at how many albums and songs Eminem released. <img alt="Number of Songs" src="images/lyrics_analysis/number_of_songs_2.png">
-First difference is that Eminem produced much more songs in his career (396 vs 160), but it can be explained by the length of his career. He released his first album 11 years earlier than Miley Cyrus.</p>
+<p>Let’s look at how many albums and songs Eminem released.
+<img alt="Number of Songs" src="images/lyrics_analysis/number_of_songs_2.png">
+<figcaption>Number of songs in the albums</figcaption></p>
+<p>First difference is that Eminem produced much more songs in his career (396 vs 160), but it can be explained by the length of his career. He released his first album 11 years earlier than Miley Cyrus.</p>
 <div class="highlight"><pre><span></span><code><span class="n">word_counter</span> <span class="o">=</span> <span class="n">get_word_counter</span><span class="p">(</span><span class="n">lyrics_df</span><span class="p">.</span><span class="n">tokens</span><span class="p">)</span>
 <span class="n">print</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">word_counter</span><span class="p">),</span> <span class="s1">&#39;unique words&#39;</span><span class="p">)</span>
 
@@ -154,19 +156,26 @@ First difference is that Eminem produced much more songs in his career (396 vs 1
 <p>Remind you, in the previous dataset the vocabulary size is about 2100 unique words. In the case of Eminem this number is tremendous - 12792. That’s impressive! Let’s look at the ranges of the number of words and the number of unique words in the lyrics. </p>
 <h2>Number of words</h2>
 <p><img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_words_in_lyrics_2.png">
-<img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_words_in_dataset_2.png"></p>
+<figcaption>Distribution of words count in albums</figcaption>
+<img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_words_in_dataset_2.png">
+<figcaption>Distribution of words count in the dataset</figcaption></p>
 <p>Most of the songs consist of 200 to 400 words, which is likewise several times higher than in the Miley Cyrus example (about 70 to 130). Moreover, there is a song with more than 1700 words (maximum  for Miley Cyrus is about 280 words). </p>
 <p><img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_unique_words_in_lyrics_2.png">
-<img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_unique_words_in_dataset_2.png"></p>
+<figcaption>Distribution of unique words count in albums</figcaption>
+<img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_unique_words_in_dataset_2.png">
+<figcaption>Distribution of unique words count in the dataset</figcaption></p>
 <p>Around half of the texts consist of 150 - 250 unique words. This number goes up to 500 words. There are some outliers on both sides of the chart. The maximum number of words in a lyric is about 1150. The shorter songs with less than 70 words can be explained by album-opening songs and songs featuring another artist. </p>
 <h2>Most common and rare</h2>
 <p>Let’s display the most frequent and common words (FYI, the list may contain offensive or rude words). 
 <img alt="Number of words in lyrics" src="images/lyrics_analysis/word_frequency_2.png">
-<img alt="Number of words in lyrics" src="images/lyrics_analysis/unique_word_frequency_2.png"></p>
+<figcaption>Number of occurrences of the most common words</figcaption>
+<img alt="Number of words in lyrics" src="images/lyrics_analysis/unique_word_frequency_2.png">
+<figcaption>The number of occurrences of the most common words, counting only once per song</figcaption></p>
 <p>On the charts above you can see the most frequent and common words (words, which are found in many poetries). Expectedly, the top list includes some swear words,  but it contains know, love, want, like as well. The most frequent ones know and like - the same for Miley Cyrus. Actually these words can be excluded during preprocessing. You can also define which words are most valuable using other algorithms or metrics (e.g. TFIDF). 
 Let’s plot one more chart:</p>
-<p><img alt="Correlation" src="images/lyrics_analysis/correlation_2.png"></p>
-<p>The line plot shows the positive correlation of the variety of words in the album with the number of songs in that album.The more songs - the wider vocabulary. It says that Eminem tries to use different words in his poetries.</p>
+<p><img alt="Correlation" src="images/lyrics_analysis/correlation_2.png">
+<figcaption>Dependence of vocabulary size on the number of songs in the albums</figcaption></p>
+<p>The line plot shows the positive correlation of the variety of words in the album with the number of songs in that album. The more songs - the wider vocabulary. It says that Eminem tries to use different words in his poetries.</p>
 <p>We have calculated some statistics in Eminem lyrics and compared the features with the lyrics of Miley Cyrus. We can’t confidently extend the findings to the entire pop and rap artists, but the results are still interesting.</p>
             </section>
 

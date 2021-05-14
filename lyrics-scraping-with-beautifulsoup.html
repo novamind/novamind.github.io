@@ -63,7 +63,7 @@
 <meta property="article:tag" content="Data Parsing"/>
 <meta property="article:tag" content="requests"/>
 <meta property="article:tag" content="BeautifulSoup"/>
-<meta property="og:image" content="/theme/images/home-bg.jpg">
+<meta property="og:image" content="/images/bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -80,7 +80,7 @@
     "name": "nova",
     "url": "/author/nova.html"
   },
-  "image": "/theme/images/home-bg.jpg",
+  "image": "/images/bg.jpg",
   "url": "/lyrics-scraping-with-beautifulsoup.html",
   "description": "Data Scraping (a.k.a web scraping) is a technique of extracting information from a website. Researchers take to it when a website..."
 }
@@ -124,7 +124,7 @@
             | <time datetime="Sat 06 February 2021">Sat 06 February 2021</time>
         </span>
         <!-- TODO : Modified check -->
-            <div class="post-cover cover" style="background-image: url('/theme/images/home-bg.jpg')">
+            <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
       </div>
     </header>
 
@@ -150,9 +150,11 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
 <p>We will consider the lyrics scraping from AZlyrics as it provides a huge number of song lyrics of different artists and genres. AZlyrics does not allow the content to be used by other lyrics providers, so if you are a provider, do not run the script :)</p>
 <p>Let’s go to an artist (for instance: <a href="https://www.azlyrics.com/m/mileycyrus.html">Miley Cyrus</a>) and look at how the information is structured on the website (right-click Inspect to find the code). </p>
 <p>In Elements we can see a tree of html tags. Tags have properties and attributes. The most commonly used properties during the document parsing are <code>class</code> and <code>id</code>. The id value is unique for the entire document, but several components can have the same class name. These properties help us to find the certain tag. Using the <code>text</code> attribute we can get the text between the opening and closing tags. The <code>attrs</code> returns a dictionary of attributes that are inside the tag (for instance, a.attrs[‘href’] returns a link from <code>&lt;a&gt;</code> tag). </p>
-<p><img alt="Artist Page" src="images/artistpage.png"></p>
+<p><img alt="Artist Page" src="images/artistpage.png">
+<figcaption>Songs containers</figcaption></p>
 <p>The page of the artist contains a list of his albums and songs, which are at the same level in the HTML document - song containers are not nested in the album container. Each container with <code>class=”listalbum-item”</code> contains the name of the songs and a link to the lyrics inside the <code>&lt;a&gt;</code> tag. We can follow the link and see that the text is in <code>&lt;div&gt;</code>, which hasn’t a specific class or id, but it’s involved in the parent container with <code>class="col-xs-12 col-lg-8 text-center"</code>, so we can easily extract the text.</p>
-<p><img alt="Artist Page" src="images/songpage.png"></p>
+<p><img alt="Artist Page" src="images/songpage.png">
+<figcaption>Lyrics container</figcaption></p>
 <h2>Data extraction</h2>
 <p>There are several steps we are going to follow.</p>
 <p><strong>Parse the content of the initial url</strong></p>

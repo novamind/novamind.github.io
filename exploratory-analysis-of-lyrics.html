@@ -69,7 +69,7 @@
 <meta property="article:tag" content="NLP"/>
 <meta property="article:tag" content="spacy"/>
 <meta property="article:tag" content="Miley Cirus"/>
-<meta property="og:image" content="/theme/images/home-bg.jpg">
+<meta property="og:image" content="/images/bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -86,7 +86,7 @@
     "name": "nova",
     "url": "/author/nova.html"
   },
-  "image": "/theme/images/home-bg.jpg",
+  "image": "/images/bg.jpg",
   "url": "/exploratory-analysis-of-lyrics.html",
   "description": "Have you ever thought about the lyrics of your favourite artist in terms of statistics? How many words and how many unique words the..."
 }
@@ -130,7 +130,7 @@
             | <time datetime="Thu 11 March 2021">Thu 11 March 2021</time>
         </span>
         <!-- TODO : Modified check -->
-            <div class="post-cover cover" style="background-image: url('/theme/images/home-bg.jpg')">
+            <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
       </div>
     </header>
 
@@ -153,14 +153,26 @@ exclude stop words (pronouns, auxiliary, etc) and punctuation (<code>is_stop</co
 get lemmas - basic forms of the words (<code>lemma</code> attribute)</p>
 <h2>Counting</h2>
 <p>Having tokens, we can calculate their frequency in the entire dataset or in some group of the lyrics. We’ll use a built-in <code>Counter</code>, that forms a list of tuples (a word and how much it occurs in the input data) and allows us to get the most common words.</p>
-<p>First let’s check how many songs are in each album and EP. <img alt="Number of Songs" src="images/lyrics_analysis/numberofsongs.png"></p>
+<p>First let’s check how many songs are in each album and EP.<br>
+<img alt="Number of Songs" src="images/lyrics_analysis/numberofsongs.png">
+<figcaption>Number of songs in the albums</figcaption></p>
 <p>So, there is a big difference in the number of songs: the EPs contain 6 and 7 songs, the albums contain from 11 to 22 songs. 
-After the preprocessing of the initial list of tokens there are 2107 unique words in the dataset. Let’s see how the number of words vary from release to release. <img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_words_in_lyrics.png"></p>
-<p>Did you know that a couple of words are enough for a song? =) Probably it’s a short intro. The longest poetries in “Bangerz”,  the rest of the releases mostly have from 60 to 150 words. But there are some outliers, which contain up to 280 words. Let’s check unique words. <img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_unique_words_in_lyrics.png"></p>
-<p>It is interesting, the most wide vocabulary is used in one of the shortest EPs, and the longest release is quite average. In general, 50% of all songs are composed with about 40 - 60 unique words. A few songs consist of more than 100 different words. <img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_unique_words_in_dataset.png"></p>
+After the preprocessing of the initial list of tokens there are 2107 unique words in the dataset. Let’s see how the number of words vary from release to release.<br>
+<img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_words_in_lyrics.png">
+<figcaption>Distribution of words count in the albums</figcaption></p>
+<p>Did you know that a couple of words are enough for a song? =) Probably it’s a short intro. The longest poetries in “Bangerz”,  the rest of the releases mostly have from 60 to 150 words. But there are some outliers, which contain up to 280 words. Let’s check unique words.<br>
+<img alt="Number of words in lyrics" src="images/lyrics_analysis/number_of_unique_words_in_lyrics.png">
+<figcaption>Distribution of unique words count in the albums</figcaption></p>
+<p>It is interesting, the most wide vocabulary is used in one of the shortest EPs, and the longest release is quite average. In general, 50% of all songs are composed with about 40 - 60 unique words. A few songs consist of more than 100 different words. 
+<img alt="Number of words in dataset" src="images/lyrics_analysis/number_of_unique_words_in_dataset.png">
+<figcaption>Distribution of words count in the dataset</figcaption></p>
 <h2>Most common and rare</h2>
-<p>Let’s find out what words are most often used in the songs and which of them are least popular. <img alt="Number of words in lyrics" src="images/lyrics_analysis/word_frequency.png"></p>
-<p>The top 30 words in Miley Cyrus songs includes <em>know</em>, <em>love</em>, <em>wanna</em>, <em>need</em>, <em>heart</em>, <em>baby</em> and others, which does not say too much, as probably that is a common situation for most popular music. Moreover, there are a couple of interjections (<em>oh</em>, <em>la</em>, <em>na</em> etc), which is also expected. We can find out which words are in most of the songs. <img alt="Number of words in lyrics" src="images/lyrics_analysis/unique_word_frequency.png"></p>
+<p>Let’s find out what words are most often used in the songs and which of them are least popular. 
+<img alt="Number of words in lyrics" src="images/lyrics_analysis/word_frequency.png">
+<figcaption>Number of occurrences of the most common words</figcaption></p>
+<p>The top 30 words in Miley Cyrus songs includes <em>know</em>, <em>love</em>, <em>wanna</em>, <em>need</em>, <em>heart</em>, <em>baby</em> and others, which does not say too much, as probably that is a common situation for most popular music. Moreover, there are a couple of interjections (<em>oh</em>, <em>la</em>, <em>na</em> etc), which is also expected. We can find out which words are in most of the songs. 
+<img alt="Number of words in lyrics" src="images/lyrics_analysis/unique_word_frequency.png">
+<figcaption>The number of occurrences of the most common words, counting only once per song</figcaption></p>
 <p>The list of top words doesn’t change dramatically.  About 110 songs include know, more than 80 lyrics contain love and like.
 Let’s look at words that appear only once. There are 867 such ones. A few examples: <em>adorable</em>, <em>finish</em>, <em>pollution</em>, <em>bag</em>, <em>intertwine</em>, <em>dusk</em>, <em>arrow</em>, <em>hoppin</em>, <em>stray</em>, <em>last</em>. If the top-30 of the most popular words consist of only monosyllabic words, the list of infrequent words includes words that have 2 and 3 syllabics.</p>
 <p>At this point we pause our research. We explored some basic statistics and found out the most popular and rare words. You can continue exploratory analysis, using Spacy features, compare with other artists and so on.</p>

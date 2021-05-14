@@ -786,7 +786,7 @@ img {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 2.5em auto
+    margin: 1em auto
 }
 
 .clear {
@@ -1452,6 +1452,11 @@ img {
     margin-right: auto;
 }
 
+figcaption {
+    color: #45484d;
+    text-align: center;
+    font: italic smaller sans-serif;
+}
 .post-info {
     margin-top: 6em;
     overflow: hidden

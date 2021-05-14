@@ -61,7 +61,7 @@
 <meta property="article:tag" content="ngrok"/>
 <meta property="article:tag" content="http.server"/>
 <meta property="article:tag" content="API test"/>
-<meta property="og:image" content="/theme/images/home-bg.jpg">
+<meta property="og:image" content="/images/bg.jpg">
 
 <!-- Twitter Card -->
 
@@ -78,7 +78,7 @@
     "name": "nova",
     "url": "/author/nova.html"
   },
-  "image": "/theme/images/home-bg.jpg",
+  "image": "/images/bg.jpg",
   "url": "/how-to-demonstrate-your-project-without-a-public-ip.html",
   "description": "Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local..."
 }
@@ -122,7 +122,7 @@
             | <time datetime="Fri 19 February 2021">Fri 19 February 2021</time>
         </span>
         <!-- TODO : Modified check -->
-            <div class="post-cover cover" style="background-image: url('/theme/images/home-bg.jpg')">
+            <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
       </div>
     </header>
 
@@ -151,9 +151,11 @@ $ unzip ngrok-stable-linux-amd64.zip
 If there is an <code>index.html</code> file, you will get the file, otherwise the directory content.</p>
 <p>Having a local server you can expose it to the Internet. All you need is to start ngrok using the port that your server is listening on:
 <code>$ ./ngrok http 8181</code>
-<img alt="ngrok status" src="images/ngrok_test.png" title="ngrok session information"></p>
+<img alt="ngrok status" src="images/ngrok_test.png">
+<figcaption>Session status</figcaption></p>
 <p>Here you can see the temporary domain for exposing your files or service, which can be accessed from other machines. In my case it is a simple server that handles 2 parameters to get a prediction:</p>
-<p><img alt="ngrok api test" src="images/ngrok_api_test.png" title="API test"></p>
+<p><img alt="ngrok api test" src="images/ngrok_api_test.png">
+<figcaption>Test on a prediction service</figcaption></p>
 <p>Note, that this approach has no built-in security and data protection features. Consider using TLS/SSL or a VPN connection if you need some more security.
 Read the <a href="https://ngrok.com/docs#http">documentation</a> to find more details. </p>
             </section>
