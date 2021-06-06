@@ -144,16 +144,16 @@ Numerical methods are mostly about <a href="https://en.wikipedia.org/wiki/Statis
 <h2>Normal probability plot</h2>
 <p><a href="https://en.wikipedia.org/wiki/Normal_probability_plot">The normal probability plot</a> is a special case of the Q-Q plot for identifying the normality of the data. 
 Let’s assume, we have some data. As an example, I generated <a href="https://en.wikipedia.org/wiki/Multimodal_distribution">bimodal distribution</a> merging two samples of the normal distribution with different parameters.
-<img alt="" src="images/qq_plot/empirical_data.png"><figcaption>Randomly generated bimodal dataset</figcaption></p>
+<img alt="image1" src="images/qq_plot/empirical_data.png"><figcaption>Randomly generated bimodal dataset</figcaption></p>
 <p>For the theoretical data, I took a normal sample of the same size.
-<img alt="" src="images/qq_plot/theoretical_data.png"><figcaption>Randomly generated normal sample</figcaption></p>
+<img alt="image2" src="images/qq_plot/theoretical_data.png"><figcaption>Randomly generated normal sample</figcaption></p>
 <p>After ordering the values we can draw the Q-Q plot (or a normal probability plot in this case). A <a href="https://en.wikipedia.org/wiki/Linear_regression">regression</a> line helps to see empirical data deviations from the normal distribution.
-<img alt="" src="images/qq_plot/qq_plot.png"><figcaption>Ordered empirical values versus ordered theoretical values</figcaption></p>
+<img alt="image3" src="images/qq_plot/qq_plot.png"><figcaption>Ordered empirical values versus ordered theoretical values</figcaption></p>
 <p>The line, formed by the points, is slightly bent in two places. These curves denote two peaks in the data. The deviation on the left is caused by a steep shoulder and the data points are skewed right. Also, we can see a lonely dot on the right. It is an outlier. </p>
 <h2>Quantiles</h2>
 <p>The plot is called quantile-quantile, which means that we use quantiles. Previously, we constructed the plot using the row data points, just ordered. So, in that case, the ordered values played the role of the quantiles of the samples. Generally, the quantiles choice depends on the purpose and on the distribution in question. There are <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#Plotting_positions">different ways to calculate the quantiles</a>. 
 For example, <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">stats from SciPy package</a> calculates theoretical quantiles using <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#Filliben's_estimate">Filliben's estimate</a>. 
-<img alt="" src="images/qq_plot/qq_plot.png"><figcaption>Ordered empirical values versus Filliben's estimate of ordered theoretical values</figcaption></p>
+<img alt="image4" src="images/qq_plot/qq_plot.png"><figcaption>Ordered empirical values versus Filliben's estimate of ordered theoretical values</figcaption></p>
 <p>The plot is almost the same for our data. The dots form a smoother line, it’s probably caused by random character of theoretical data generation. Overall, the result the same: the data differ from a theoretical normal distribution. </p>
 <h2>Conclusion</h2>
 <p>The Q-Q plot is a simple graphical way to determine data deviations from the theoretical distribution and can be an visual addition to analytical approaches. For more precise decision there are different numerical methods.</p>
