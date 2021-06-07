@@ -153,7 +153,7 @@ Let’s assume, we have some data. As an example, I generated <a href="https://e
 <h2>Quantiles</h2>
 <p>The plot is called quantile-quantile, which means that we use quantiles. Previously, we constructed the plot using the row data points, just ordered. So, in that case, the ordered values played the role of the quantiles of the samples. Generally, the quantiles choice depends on the purpose and on the distribution in question. There are <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#Plotting_positions">different ways to calculate the quantiles</a>. 
 For example, <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">stats from SciPy package</a> calculates theoretical quantiles using <a href="https://en.wikipedia.org/wiki/Q%E2%80%93Q_plot#Filliben's_estimate">Filliben's estimate</a>. 
-<img alt="image4" src="images/qq_plot/qq_plot.png"><figcaption>Ordered empirical values versus Filliben's estimate of ordered theoretical values</figcaption></p>
+<img alt="image4" src="images/qq_plot/qq_plot_2.png"><figcaption>Ordered empirical values versus Filliben's estimate of ordered theoretical values</figcaption></p>
 <p>The plot is almost the same for our data. The dots form a smoother line, it’s probably caused by random character of theoretical data generation. Overall, the result the same: the data differ from a theoretical normal distribution. </p>
 <h2>Conclusion</h2>
 <p>The Q-Q plot is a simple graphical way to determine data deviations from the theoretical distribution and can be an visual addition to analytical approaches. For more precise decision there are different numerical methods.</p>
