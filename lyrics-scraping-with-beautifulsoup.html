@@ -121,7 +121,7 @@
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="/author/nova.html">Valentina Kononova</a>
-            | <time datetime="Sat 06 February 2021">Sat 06 February 2021</time>
+            | <time datetime="Сб 06 февраля 2021">Сб 06 февраля 2021</time>
         </span>
         <!-- TODO : Modified check -->
             <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
@@ -150,11 +150,13 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
 <p>We will consider the lyrics scraping from AZlyrics as it provides a huge number of song lyrics of different artists and genres. AZlyrics does not allow the content to be used by other lyrics providers, so if you are a provider, do not run the script :)</p>
 <p>Let’s go to an artist (for instance: <a href="https://www.azlyrics.com/m/mileycyrus.html">Miley Cyrus</a>) and look at how the information is structured on the website (right-click Inspect to find the code). </p>
 <p>In Elements we can see a tree of html tags. Tags have properties and attributes. The most commonly used properties during the document parsing are <code>class</code> and <code>id</code>. The id value is unique for the entire document, but several components can have the same class name. These properties help us to find the certain tag. Using the <code>text</code> attribute we can get the text between the opening and closing tags. The <code>attrs</code> returns a dictionary of attributes that are inside the tag (for instance, a.attrs[‘href’] returns a link from <code>&lt;a&gt;</code> tag). </p>
-<p><img alt="Artist Page" src="images/artistpage.png">
-<figcaption>Songs containers</figcaption></p>
+<p><img alt="Artist Page" src="images/artistpage.png"></p>
+<figcaption>Songs containers</figcaption>
+
 <p>The page of the artist contains a list of his albums and songs, which are at the same level in the HTML document - song containers are not nested in the album container. Each container with <code>class=”listalbum-item”</code> contains the name of the songs and a link to the lyrics inside the <code>&lt;a&gt;</code> tag. We can follow the link and see that the text is in <code>&lt;div&gt;</code>, which hasn’t a specific class or id, but it’s involved in the parent container with <code>class="col-xs-12 col-lg-8 text-center"</code>, so we can easily extract the text.</p>
-<p><img alt="Artist Page" src="images/songpage.png">
-<figcaption>Lyrics container</figcaption></p>
+<p><img alt="Artist Page" src="images/songpage.png"></p>
+<figcaption>Lyrics container</figcaption>
+
 <h2>Data extraction</h2>
 <p>There are several steps we are going to follow.</p>
 <p><strong>Parse the content of the initial url</strong></p>
@@ -164,24 +166,20 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p><strong>Parse the content of the songs pages</strong></p>
 <p>Go through the list of song containers and construct the full link to the lyric, as the <code>&lt;a&gt;</code> contains relative link:</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.listalbum-item&#39;</span><span class="p">):</span>
     <span class="n">s_link</span> <span class="o">=</span> <span class="s1">&#39;https://www.azlyrics.com&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Extract the content of the song page and parse the document:</p>
 <div class="highlight"><pre><span></span><code><span class="n">s_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s_link</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">page_content</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">s_page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-
 <p>Select the container with the <code>class=”col-xs-12.col-lg-8.text-center”</code> and pull the lyrics:</p>
 <div class="highlight"><pre><span></span><code><span class="n">s_text</span> <span class="o">=</span> <span class="n">page_content</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;.col-xs-12.col-lg-8.text-center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>Get album information, including its title, year of realise (check if there is an album, because some releases do not involved into any album):</p>
 <div class="highlight"><pre><span></span><code><span class="n">lyrics</span> <span class="o">=</span> <span class="n">page_content</span><span class="o">.</span><span class="n">select_one</span><span class="p">(</span><span class="s1">&#39;.col-xs-12.col-lg-8.text-center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -193,7 +191,6 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
     <span class="n">album_title</span> <span class="o">=</span> <span class="n">album</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">text</span>
 </code></pre></div>
 
-
 <p>Add a dictionary containing the song title, its lyrics and album information to dataset:</p>
 <div class="highlight"><pre><span></span><code><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
     <span class="s1">&#39;album_info&#39;</span><span class="p">:</span> <span class="n">album_details</span><span class="p">,</span> 
@@ -202,7 +199,6 @@ BeautifulSoup object contains the nested html tags (body, div, p, etc) and we ca
     <span class="s1">&#39;song_title&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">text</span>
 <span class="p">})</span>
 </code></pre></div>
-
 
 <p>Multiple requests can overload the server and it can affect its functioning. Moreover, requests to the server with the same IP address can cause a ban of the user, as it may be recognized as suspicious actions. 
 We can solve it by using a custom user agent and adding a delay in every loop: <code>time.sleep(15)</code>.</p>
