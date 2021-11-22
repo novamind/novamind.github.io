@@ -36,7 +36,7 @@
 
 
 
-    <meta name="description" content="Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local network, you need to type the IP address and the port. But if you want to do that over the Internet, you can encounter some troubles (http://public_ip:port doesn’t work), as usually, your computer is behind the NAT, which means you should provide ports forwarding, but it can be not easy and sometimes Internet Service Providers do not allow change the settings. To avoid these problems, you can use ngrok.">
+    <meta name="description" content="Sometimes you need to show your project to your colleagues, interviewer or whoever. When you serve your project in a local network, you need to type the IP address and the port. If you want your project to be accessed over the Internet, http://public_ip:port doesn’t work, as usually your computer is behind the NAT, which means you should provide port forwarding, but it can be not easy and sometimes Internet Service Providers do not allow change the settings. You can avoid potential problems with configuring your network if you use ngrok.">
 
     <meta name="author" content="nova">
 
@@ -50,11 +50,11 @@
 <!-- Open Graph -->
 <meta property="og:site_name" content="novamind"/>
 <meta property="og:title" content="How to demonstrate your project without a public IP"/>
-<meta property="og:description" content="Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local..."/>
+<meta property="og:description" content="Sometimes you need to show your project to your colleagues, interviewer or whoever. When you serve your project in a local network, you..."/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="/how-to-demonstrate-your-project-without-a-public-ip.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2021-02-19 00:00:00+01:00"/>
+<meta property="article:published_time" content="2021-11-18 00:00:00+01:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="/author/nova.html">
 <meta property="article:section" content="misc"/>
@@ -71,7 +71,7 @@
   "@type": "Article",
   "name": "How to demonstrate your project without a public IP",
   "headline": "How to demonstrate your project without a public IP",
-  "datePublished": "2021-02-19 00:00:00+01:00",
+  "datePublished": "2021-11-18 00:00:00+01:00",
   "dateModified": "",
   "author": {
     "@type": "Person",
@@ -80,7 +80,7 @@
   },
   "image": "/images/bg.jpg",
   "url": "/how-to-demonstrate-your-project-without-a-public-ip.html",
-  "description": "Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local..."
+  "description": "Sometimes you need to show your project to your colleagues, interviewer or whoever. When you serve your project in a local network, you..."
 }
 </script>
 </head>
@@ -119,7 +119,7 @@
         <!-- TODO : Proper class for headline -->
         <span class="post-meta">
                 <a href="/author/nova.html">Valentina Kononova</a>
-            | <time datetime="Пт 19 февраля 2021">Пт 19 февраля 2021</time>
+            | <time datetime="Чт 18 ноября 2021">Чт 18 ноября 2021</time>
         </span>
         <!-- TODO : Modified check -->
             <div class="post-cover cover" style="background-image: url('/images/bg.jpg')">
@@ -134,31 +134,27 @@
         <article class="post">
         <div class="inner">
             <section class="post-content">
-                <p>Sometimes you need to show your project to your colleagues, interviewer, etc, or provide some tests. When you serve it in a local network, you need to type the IP address and the port. But if you want to do that over the Internet, you can encounter some troubles (http://public_ip:port doesn’t work), as usually, your computer is behind the NAT, which means you should provide ports forwarding, but it can be not easy and sometimes Internet Service Providers do not allow change the settings. To avoid these problems, you can use <strong>ngrok</strong>.</p>
-<p>Ngrok is a service that creates a tunnel to your computer and generates an URL that you can share to access your service or files.</p>
-<p>To install ngrok on Linux you can go through the following steps:</p>
-<div class="highlight"><pre><span></span><code>$ mkdir ngrok
-$ <span class="nb">cd</span> ngrok/
-$ wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-$ unzip ngrok-stable-linux-amd64.zip
+                <p>Sometimes you need to show your project to your colleagues, interviewer or whoever. When you serve your project in a local network, you need to type the IP address and the port. If you want your project to be accessed over the Internet, <code>http://public_ip:port</code> doesn’t work, as usually your computer is behind the <a href="https://en.wikipedia.org/wiki/Network_address_translation">NAT</a>, which means you should provide <a href="https://en.wikipedia.org/wiki/Port_forwarding">port forwarding</a>, but it can be not easy and sometimes Internet Service Providers do not allow change the settings. You can avoid potential problems with configuring your network if you use <strong>ngrok</strong>.  </p>
+<p><a href="https://ngrok.com/">Ngrok</a> is a service that creates a tunnel to your computer and generates an URL that you can share to access your service or files.</p>
+<p>To install and run ngrok on Linux you can go through the following steps (do not forget to specify your_port):</p>
+<div class="highlight"><pre><span></span><code>mkdir ngrok
+cd ngrok/
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+unzip ngrok-stable-linux-amd64.zip
+./ngrok http your_port
 </code></pre></div>
 
-<p>As you have installed the ngrok, you need to show up your server. As an example, I’ll use python’s http.server to get a prototype API:</p>
-<p><code>$ python -m http.server 8181</code></p>
-<p>Now your directory is serving to the specified port: 
-<code>Serving HTTP on 0.0.0.0 port 8181 (http://0.0.0.0:8181/) …</code> 
-If there is an <code>index.html</code> file, you will get the file, otherwise the directory content.</p>
-<p>Having a local server you can expose it to the Internet. All you need is to start ngrok using the port that your server is listening on:
-<code>$ ./ngrok http 8181</code>
-<img alt="ngrok status" src="images/ngrok_test.png"></p>
-<figcaption>Session status</figcaption>
-
-<p>Here you can see the temporary domain for exposing your files or service, which can be accessed from other machines. In my case it is a simple server that handles 2 parameters to get a prediction:</p>
-<p><img alt="ngrok api test" src="images/ngrok_api_test.png"></p>
-<figcaption>Test on a prediction service</figcaption>
-
-<p>Note, that this approach has no built-in security and data protection features. Consider using TLS/SSL or a VPN connection if you need some more security.
-Read the <a href="https://ngrok.com/docs#http">documentation</a> to find more details. </p>
+<p>That’s it! Now all you need is to expose your project to the same port. 
+As an example, I’m going to use python’s <code>http.server</code> to show a prototype API. 
+To serve your folder type <code>python -m http.server your_port</code> within the directory. You’ll get a message:
+<code>Serving HTTP on 0.0.0.0 port your_port (http://0.0.0.0:your_port/) …</code> </p>
+<p>Now you can share the temporary domain shown in the screenshot above. Using this domain, your folder can be accessed from other machines, not necessarily connected to your local network. If there is an index.html file, you will see the corresponding web page; otherwise, the contents of the directory.
+I am exposing a simple service that processes 2 parameters to get a prediction:</p>
+<p>So, to serve your folder/project over the internet you need:<br>
+- To start a local server (e.g., using python.server)<br>
+- To start ngrok using the port that your server is listening on  </p>
+<p>Note, that this approach has no built-in security and data protection features. Consider using TLS/SSL or a VPN connection if you need some more security.<br>
+Read the <a href="https://ngrok.com/docs#http">documentation</a> to find more details.  </p>
             </section>
 
             <section class="post-info">
